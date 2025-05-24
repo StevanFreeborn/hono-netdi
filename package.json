@@ -1,0 +1,73 @@
+{
+  "name": "@stevanfreeborn/hono-netdi",
+  "version": "0.0.0",
+  "description": "A dependency injection container for Hono.js, inspired by .NET's DI system.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "test": "vitest",
+    "test:ci": "vitest --run --coverage",
+    "test:coverage": "vitest --coverage",
+    "test:ui": "vitest --ui --api 9527",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts, --fix",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write ."
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist",
+    "LICENSE.md",
+    "README.md",
+    "package.json"
+  ],
+  "keywords": [
+    "hono",
+    "honojs",
+    "netdi",
+    "dependency-injection",
+    "typescript",
+    "nodejs",
+    "container"
+  ],
+  "author": {
+    "name": "Stevan Freeborn",
+    "email": "stevan.freeborn@gmail.com",
+    "website": "https://stevanfreeborn.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StevanFreeborn/hono-netdi.git"
+  },
+  "homepage": "https://github.com/StevanFreeborn/hono-netdi",
+  "bugs": {
+    "url": "https://github.com/StevanFreeborn/hono-netdi/issues",
+    "email": "stevan.freeborn@gmail.com"
+  },
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@swc/core": "^1.11.29",
+    "@types/node": "^22.15.21",
+    "@vitest/coverage-istanbul": "^3.1.4",
+    "@vitest/ui": "^3.1.3",
+    "eslint": "^9.27.0",
+    "globals": "^16.1.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.32.1",
+    "unplugin-swc": "^1.5.3",
+    "vitest": "^3.1.3"
+  },
+  "dependencies": {
+    "@stevanfreeborn/netdi": "^1.0.1"
+  },
+  "peerDependencies": {
+    "hono": "*"
+  }
+}

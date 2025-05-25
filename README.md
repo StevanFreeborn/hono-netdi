@@ -1,5 +1,13 @@
 # hono-netdi
 
+[![pull_request](https://github.com/StevanFreeborn/hono-netdi/actions/workflows/pull_request.yml/badge.svg)](https://github.com/StevanFreeborn/hono-netdi/actions/workflows/pull_request.yml)
+[![codecov](https://codecov.io/gh/StevanFreeborn/hono-netdi/graph/badge.svg?token=RSPq92k1Mz)](https://codecov.io/gh/StevanFreeborn/hono-netdi)
+[![publish](https://github.com/StevanFreeborn/hono-netdi/actions/workflows/publish.yml/badge.svg)](https://github.com/StevanFreeborn/hono-netdi/actions/workflows/publish.yml)
+[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+![NPM License](https://img.shields.io/npm/l/%40stevanfreeborn%2Fhono-netdi)
+![NPM Version](https://img.shields.io/npm/v/%40stevanfreeborn%2Fhono-netdi)
+![NPM Downloads](https://img.shields.io/npm/dt/%40stevanfreeborn%2Fhono-netdi)
+
 A powerful dependency injection middleware for [Hono.js](https://honojs.dev/), inspired by .NET's dependency injection system. This library seamlessly integrates [@stevanfreeborn/netdi](https://github.com/StevanFreeborn/netdi) with Hono applications, providing automatic service scope management and clean resource disposal for each HTTP request.
 
 ## Features

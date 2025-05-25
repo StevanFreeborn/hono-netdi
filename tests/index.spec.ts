@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { Env, Hono } from 'hono';
-import { createServiceIdentifier, IServiceScope, ServiceCollection } from '@stevanfreeborn/netdi';
+import { createServiceIdentifier, IServiceScope, ServiceCollection } from '../src/index';
 import { injectServices, useService } from '../src/index';
 import { randomUUID } from 'crypto';
 

@@ -6,9 +6,8 @@ export default defineConfig({
     environment: 'node',
     coverage: {
       provider: 'istanbul',
-      reporter: ['text', 'html', 'json', 'lcov'],
+      reporter: ['text', 'html', 'json', 'lcov', 'cobertura'],
       include: ['**/src/**/*.ts'],
-      exclude: ['**/src/index.ts'],
     },
   },
   plugins: [swc.vite()],

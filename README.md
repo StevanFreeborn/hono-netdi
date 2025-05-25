@@ -29,7 +29,13 @@ pnpm add @stevanfreeborn/hono-netdi hono
 
 ```typescript
 import { Hono } from 'hono';
-import { ServiceCollection, createServiceIdentifier, injectable, injectServices, useService } from '@stevanfreeborn/hono-netdi';
+import {
+  ServiceCollection,
+  createServiceIdentifier,
+  injectable,
+  injectServices,
+  useService,
+} from '@stevanfreeborn/hono-netdi';
 
 // Define your service interface and implementation
 interface IUserService {
@@ -56,7 +62,7 @@ const app = new Hono();
 app.use(injectServices(serviceProvider));
 
 // Use services in your routes
-app.get('/users/:id', async (c) => {
+app.get('/users/:id', async c => {
   const userService = useService(c, IUserService);
   const user = await userService.getUser(c.req.param('id'));
   return c.json(user);
@@ -135,7 +141,7 @@ import { injectable, inject } from '@stevanfreeborn/hono-netdi';
 class UserService implements IUserService {
   constructor(
     @inject(IUserRepository) private userRepository: IUserRepository,
-    @inject(ILogger) private logger: ILogger
+    @inject(ILogger) private logger: ILogger,
   ) {}
 }
 ```
@@ -232,7 +238,7 @@ class UserRepository implements IUserRepository {
 class UserService implements IUserService {
   constructor(
     @inject(IUserRepository) private userRepository: IUserRepository,
-    @inject(ILogger) private logger: ILogger
+    @inject(ILogger) private logger: ILogger,
   ) {}
 
   async getUser(id: string): Promise<User> {
@@ -284,13 +290,13 @@ services.addScoped(EmailNotification, EmailNotificationService);
 services.addScoped(SmsNotification, SmsNotificationService);
 
 // Use in routes
-app.post('/notify', async (c) => {
+app.post('/notify', async c => {
   const emailService = useService(c, EmailNotification);
   const smsService = useService(c, SmsNotification);
-  
+
   await emailService.send('Hello via email!');
   await smsService.send('Hello via SMS!');
-  
+
   return c.json({ success: true });
 });
 ```
@@ -326,10 +332,10 @@ const IDatabase = createServiceIdentifier<IDatabase>();
 
 services.addSingleton<IDatabaseConfig>(IDatabaseConfig, () => ({
   connectionString: process.env.DB_CONNECTION_STRING!,
-  timeout: 30000
+  timeout: 30000,
 }));
 
-services.addScoped(IDatabase, (provider) => {
+services.addScoped(IDatabase, provider => {
   const config = provider.getService(IDatabaseConfig);
   return new Database(config);
 });
@@ -340,9 +346,9 @@ services.addScoped(IDatabase, (provider) => {
 The middleware automatically handles service scope disposal even when errors occur:
 
 ```typescript
-app.get('/error-example', async (c) => {
+app.get('/error-example', async c => {
   const userService = useService(c, IUserService);
-  
+
   try {
     // This might throw an error
     const user = await userService.getUser('invalid-id');
@@ -369,7 +375,7 @@ app.use(cors());
 app.use(logger());
 
 // Routes can now use services
-app.get('/', (c) => {
+app.get('/', c => {
   const service = useService(c, IMyService);
   return c.json(service.getData());
 });
@@ -408,7 +414,7 @@ const ILogger = createServiceIdentifier<ILogger>();
 @injectable()
 class UserService {
   constructor(@inject(ILogger) private logger: ILogger) {}
-  
+
   async getUser(id: string): Promise<User> {
     this.logger.log(`Getting user ${id}`);
     // Implementation
@@ -444,7 +450,7 @@ Keep dependencies minimal and well-defined:
 class UserService implements IUserService {
   constructor(
     @inject(IUserRepository) private userRepository: IUserRepository,
-    @inject(ILogger) private logger: ILogger
+    @inject(ILogger) private logger: ILogger,
   ) {}
 }
 
@@ -471,10 +477,10 @@ class UserService implements IUserService {
 ```typescript
 // ✅ Correct order
 app.use(injectServices(serviceProvider));
-app.get('/', (c) => useService(c, IMyService));
+app.get('/', c => useService(c, IMyService));
 
 // ❌ Wrong order
-app.get('/', (c) => useService(c, IMyService));
+app.get('/', c => useService(c, IMyService));
 app.use(injectServices(serviceProvider));
 ```
 

@@ -48,7 +48,7 @@ describe('injectServices', () => {
 describe('useService', () => {
   test('it should throw an error if the service scope is not found in context', async () => {
     type ITestService = object;
-    
+
     const serviceId = createServiceIdentifier<ITestService>();
     const app = new Hono<Env>();
 
@@ -68,13 +68,13 @@ describe('useService', () => {
 
   test('it should throw an error if the service scope is not an instance of ServiceScope', async () => {
     type ITestService = object;
-    
+
     const serviceId = createServiceIdentifier<ITestService>();
     const app = new Hono<Env>();
 
     app.get('/', c => {
       c.set('serviceScope', {} as IServiceScope);
-      
+
       try {
         useService(c, serviceId);
         return c.text('Service scope found', 200);
@@ -114,7 +114,6 @@ describe('useService', () => {
 
     expect(res.status).toBe(500);
   });
-
 
   test('it should return the service from the service scope', async () => {
     interface ITestService {

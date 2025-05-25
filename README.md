@@ -216,6 +216,10 @@ interface IUserService {
   getUser(id: string): Promise<User>;
 }
 
+const ILogger = createServiceIdentifier<ILogger>();
+const IUserRepository = createServiceIdentifier<IUserRepository>();
+const IUserService = createServiceIdentifier<IUserService>();
+
 @injectable()
 class Logger implements ILogger {
   log(message: string) {
@@ -246,11 +250,6 @@ class UserService implements IUserService {
     return await this.userRepository.findById(id);
   }
 }
-
-// Service registration
-const ILogger = createServiceIdentifier<ILogger>();
-const IUserRepository = createServiceIdentifier<IUserRepository>();
-const IUserService = createServiceIdentifier<IUserService>();
 
 const services = new ServiceCollection();
 services.addSingleton(ILogger, Logger);
